@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    リアルタイムカメラ
+{% endblock %}
+
+{% block active_camera %}
+    active
+{% endblock %}
+
+{% block header %}
+    <link rel="stylesheet" href="{% static 'css/page.css' %}">
+{% endblock %}
+
+{% block content %}
+<div>
+    <div id="image_area">
+        <img src="/video_feed" width="810" height="540"/>
+    </div>
+</div>
+<script>
+
+
+</script>
+
+{% endblock %}
+
+
+
