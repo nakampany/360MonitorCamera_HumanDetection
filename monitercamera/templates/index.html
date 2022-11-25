@@ -9,9 +9,9 @@
 <header class="masthead text-center text-white">
     <div class="masthead-content">
         <div class="container">
-            <h1 class="masthead-heading mb-0">全方向見守る君</h1>
-            <h2 class="masthead-subheading mb-0">360°カメラで全方位監視を行います</h2>
-            <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'account_login' %}">LOG IN</a>
+            <h1 class="masthead-heading mb-0">360°監視カメラ</h1>
+            <h2 class="masthead-subheading mb-0">カメラで全方位監視を行います</h2>
+            <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'account_login' %}">いますぐ見る</a>
         </div>
     </div>
     <div class="bg-circle-1 bg-circle"></div>
@@ -22,11 +22,6 @@
 {% endblock %}
 
 {% block contents %}
-<div>
-    <div id="image_area">
-        <img src="/video_feed" width="810" height="540"/>
-    </div>
-</div>
     <section>
         <div class="container">
             <div class="row align-items-center">
