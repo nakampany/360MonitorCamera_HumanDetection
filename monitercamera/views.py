@@ -10,6 +10,7 @@ import cv2
 from django.http import StreamingHttpResponse
 from django.shortcuts import render
 from django.views import View
+from myproject.settings import BASE_DIR
 
 
 logger = logging.getLogger(__name__)
@@ -43,21 +44,31 @@ def video_feed_view():
 
 # フレーム生成・返却する処理
 def generate_frame():
-    capture = cv2.VideoCapture(1)
+    capture = cv2.VideoCapture(0)
 
     while True:
         if not capture.isOpened():
             print("Capture is not opened.")
             break
         # カメラからフレーム画像を取得
-        ret, frame = capture.read()
-        if not ret:
-            print("Failed to read frame.")
-            break
-        # フレーム画像バイナリに変換
-        ret, jpeg = cv2.imencode('.jpg', frame)
+        success, image = capture.read()
+
+        cascade_path = str(BASE_DIR) + "/haarcascade_frontalface_default.xml"
+        print(cascade_path)
+        gry = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+        cascade = cv2.CascadeClassifier(cascade_path)
+        facerect = cascade.detectMultiScale(gry, 1.5, 2)
+        rectange_color = (255,0,0)
+        if len(facerect) > 0:
+            for rect in facerect:
+                cv2.rectangle(image,tuple(rect[0:2]),tuple(rect[0:2]+rect[2:4]),rectange_color,thickness=2)
+
+        ret, jpeg = cv2.imencode('.jpg', image)
         byte_frame = jpeg.tobytes()
+
         # フレーム画像のバイナリデータをユーザーに送付する
         yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + byte_frame + b'\r\n\r\n')
+               b'Content-Type: image/jpeg\r\n\r\n' + byte_frame + b'\r\n\r\n')
     capture.release()
+
+
