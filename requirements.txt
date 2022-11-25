@@ -10,3 +10,5 @@ whitenoise
 django-allauth
 django-bootstrap5
 pillow
+opencv-python
+opencv-contrib-python
