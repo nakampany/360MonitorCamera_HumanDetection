@@ -62,7 +62,8 @@
               </a>
             </li>
             {% if user.is_authenticated %}
-              <li class="nav-item"><a class="nav-link {% block active_camera %}{% endblock %}" href="{% url 'monitercamera:camera_photo' %}">PHOTO LIST</a></li>
+              <li class="nav-item"><a class="nav-link {% block active_camera_video %}{% endblock %}" href="{% url 'monitercamera:camera_video' %}">CAMERA VIDEO</a></li>
+              <li class="nav-item"><a class="nav-link {% block active_camera %}{% endblock %}" href="{% url 'monitercamera:camera_video' %}">CAMERA PHOTO</a></li>
             {% endif %}
           </ul>
 
