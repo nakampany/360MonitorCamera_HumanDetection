@@ -4,10 +4,6 @@
     リアルタイムカメラ
 {% endblock %}
 
-{% block active_camera %}
-    active
-{% endblock %}
-
 {% block header %}
     <link rel="stylesheet" href="{% static 'css/camera.css' %}">
 {% endblock %}
@@ -27,7 +23,10 @@
         <div class="row gx-4 justify-content-center">
             <div class="col-lg-8">
                 <h2>About this function</h2>
-                <p class="lead"></p>
+                <p class="lead">
+
+                    <a class="nav-link" href="{% url 'monitercamera:camera_video' %}">こちら</a>
+                </p>
             </div>
         </div>
     </div>
