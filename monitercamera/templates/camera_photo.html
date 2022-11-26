@@ -1,21 +1,23 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
 {% load static %}
 {% block title %}
     リアルタイムカメラ
 {% endblock %}
 
-{% block active_camera_video %}
+{% block active_camera_photo %}
     active
 {% endblock %}
 
 {% block header %}
     <link rel="stylesheet" href="{% static 'css/camera.css' %}">
+    <link rel="stylesheet" href="{% static 'css/img.css' %}">
 {% endblock %}
 
 {% block contents %}
 <header class="bg-primary bg-gradient text-white">
     <div class="container px-4 text-center">
-        <h1 class="fw-bolder">Welcome to Scrolling Nav</h1>
+        <h1 class="fw-bolder">Welcome to 360°見てます</h1>
         <p class="lead">カメラで全方位監視を行います</p>
         <a class="btn btn-lg btn-light" href="#about">Scrolling!</a>
     </div>
@@ -24,12 +26,72 @@
 <section id="about">
     <div class="container">
         <div class="row gx-4 justify-content-center">
-            <div class="col-lg-8">
-                <h2>About this function</h2>
-                <p class="lead">
-                    <a class="nav-link" href="{% url 'monitercamera:camera_video' %}">こちら</a>
-                </p>
-            </div>
+                <h2>Detection Images</h2>
+                <div class="post-preview">
+                    <div class="row g-0">
+                        <div class="col-lg-3 col-sm-6">
+                            <a class="portfolio-box" href="{% static 'assets/img/IMG0.jpg' %}" title="0">
+                                <img src="{% static 'assets/img/IMG0.jpg' %}" style="width: 100%;" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <a class="portfolio-box" href="{% static 'assets/img/IMG1.jpg' %}" title="1">
+                                <img src="{% static 'assets/img/IMG1.jpg' %}" style="width: 100%;" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <a class="portfolio-box" href="{% static 'assets/img/IMG2.jpg' %}" title="2">
+                                <img src="{% static 'assets/img/IMG2.jpg' %}" style="width: 100%;" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <a class="portfolio-box" href="{% static 'assets/img/IMG3.jpg' %}" title="3">
+                                <img src="{% static 'assets/img/IMG3.jpg' %}" style="width: 100%;" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <a class="portfolio-box" href="{% static 'assets/img/IMG4.jpg' %}" title="4">
+                                <img src="{% static 'assets/img/IMG4.jpg' %}" style="width: 100%;" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <a class="portfolio-box" href="{% static 'assets/img/IMG5.jpg' %}" title="5">
+                                <img src="{% static 'assets/img/IMG5.jpg' %}" style="width: 100%;" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <a class="portfolio-box" href="{% static 'assets/img/IMG6.jpg' %}" title="4">
+                                <img src="{% static 'assets/img/IMG6.jpg' %}" style="width: 100%;" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <a class="portfolio-box" href="{% static 'assets/img/IMG7.jpg' %}" title="4">
+                                <img src="{% static 'assets/img/IMG7.jpg' %}" style="width: 100%;" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <a class="portfolio-box" href="{% static 'assets/img/IMG8.jpg' %}" title="4">
+                                <img src="{% static 'assets/img/IMG8.jpg' %}" style="width: 100%;" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <a class="portfolio-box" href="{% static 'assets/img/IMG9.jpg' %}" title="5">
+                                <img src="{% static 'assets/img/IMG9.jpg' %}" style="width: 100%;" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <a class="portfolio-box" href="{% static 'assets/img/IMG10.jpg' %}" title="4">
+                                <img src="{% static 'assets/img/IMG10.jpg' %}" style="width: 100%;" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <a class="portfolio-box" href="{% static 'assets/img/IMG11.jpg' %}" title="4">
+                                <img src="{% static 'assets/img/IMG11.jpg' %}" style="width: 100%;" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4">
         </div>
     </div>
 </section>
