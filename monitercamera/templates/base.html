@@ -53,6 +53,10 @@
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav me-auto">
+            {% if user.is_authenticated %}
+              <li class="nav-item"><a class="nav-link {% block active_camera_video %}{% endblock %}" href="{% url 'monitercamera:camera_video' %}">CAMERA VIDEO</a></li>
+              <li class="nav-item"><a class="nav-link {% block active_camera_photo %}{% endblock %}" href="{% url 'monitercamera:camera_photo' %}">CAMERA PHOTO</a></li>
+            {% endif %}
             <li class="nav-item">
               <a
                 class="nav-link {% block active_inquiry %}{% endblock %}"
@@ -61,10 +65,6 @@
                 お問い合わせ
               </a>
             </li>
-            {% if user.is_authenticated %}
-              <li class="nav-item"><a class="nav-link {% block active_camera_video %}{% endblock %}" href="{% url 'monitercamera:camera_video' %}">CAMERA VIDEO</a></li>
-              <li class="nav-item"><a class="nav-link {% block active_camera %}{% endblock %}" href="{% url 'monitercamera:camera_video' %}">CAMERA PHOTO</a></li>
-            {% endif %}
           </ul>
 
 

@@ -68,6 +68,7 @@ def generate_frame():
     considerable_frames = 20
     prev_faces = []
     prev_shot = None
+    count=0
 
     #フレーム数カウント用
     while True:
@@ -82,15 +83,14 @@ def generate_frame():
         facerect = cascade.detectMultiScale(gry, 1.5, 2)
         rectange_color = (255,0,0)
 
-        # 顔が検出されるたびに連続で撮影されないための工夫（後述:詳細2）
-        # prev_shot is None -> 初回のデータ格納   seconds>3 -> 顔検出不感タイムの指定（2週目以降の処理）
+        # 顔が検出されるたびに連続で撮影されないための工夫
         if prev_shot is None or (datetime.datetime.now() - prev_shot).seconds > 3:
             for rect in facerect:
                 cv2.rectangle(image,tuple(rect[0:2]),tuple(rect[0:2]+rect[2:4]), rectange_color, thickness=2)
             prev_faces.append(len(facerect))
             if len(prev_faces) > considerable_frames:
                     drops = len(prev_faces) - considerable_frames
-                    # prev_facesのリストの先頭からdrops分だけ要素を削除したlistを返す（20を超えた要素で古いものから削除していく）
+                    # prev_facesのリストの先頭からdrops分だけ要素を削除したlistを返す
                     # prev_facesは常に20の要素数を保つ
                     prev_faces = prev_faces[drops:]
             # その20の要素数のうち、0以上の数が全要素数(=20)のどれくらいの割合を占めるかチェック
@@ -98,7 +98,8 @@ def generate_frame():
 
             # prev_facesに20よりも多くの要素が格納されようとしたとき
             if len(prev_faces) >= considerable_frames and dense >= shot_dense:
-                save_fig_name = './save_fig/{}.jpg'.format(datetime.datetime.now())
+                save_fig_name = './static/assets/img/IMG{}.jpg'.format(count)
+                count += 1
                 cv2.imwrite(save_fig_name, image)
 
                 prev_faces = []
