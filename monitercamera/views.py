@@ -10,7 +10,6 @@ import cv2
 from django.http import StreamingHttpResponse
 from django.shortcuts import render
 from myproject.settings import BASE_DIR
-import os
 import datetime
 import time
 
@@ -60,8 +59,16 @@ def videoView():
 '''
 フレーム生成・返却する処理
 '''
+
 def generate_frame():
     capture = cv2.VideoCapture(0)
+
+    anterior = 0
+    shot_dense = 0.5
+    considerable_frames = 20
+    prev_faces = []
+    prev_shot = None
+
     #フレーム数カウント用
     while True:
         if not capture.isOpened():
@@ -75,18 +82,27 @@ def generate_frame():
         facerect = cascade.detectMultiScale(gry, 1.5, 2)
         rectange_color = (255,0,0)
 
-
-
-        if len(facerect) > 0:
+        # 顔が検出されるたびに連続で撮影されないための工夫（後述:詳細2）
+        # prev_shot is None -> 初回のデータ格納   seconds>3 -> 顔検出不感タイムの指定（2週目以降の処理）
+        if prev_shot is None or (datetime.datetime.now() - prev_shot).seconds > 3:
             for rect in facerect:
                 cv2.rectangle(image,tuple(rect[0:2]),tuple(rect[0:2]+rect[2:4]), rectange_color, thickness=2)
-            t=str(datetime.datetime.now())
+            prev_faces.append(len(facerect))
+            if len(prev_faces) > considerable_frames:
+                    drops = len(prev_faces) - considerable_frames
+                    # prev_facesのリストの先頭からdrops分だけ要素を削除したlistを返す（20を超えた要素で古いものから削除していく）
+                    # prev_facesは常に20の要素数を保つ
+                    prev_faces = prev_faces[drops:]
+            # その20の要素数のうち、0以上の数が全要素数(=20)のどれくらいの割合を占めるかチェック
+            dense = sum([1 for i in prev_faces if i > 0]) / float(len(prev_faces))
 
-            frame_color = cv2.putText(image, t,(10,20), cv2.FONT_HERSHEY_PLAIN,1,(255,255,255),1,cv2.LINE_AA)
+            # prev_facesに20よりも多くの要素が格納されようとしたとき
+            if len(prev_faces) >= considerable_frames and dense >= shot_dense:
+                save_fig_name = './save_fig/{}.jpg'.format(datetime.datetime.now())
+                cv2.imwrite(save_fig_name, image)
 
-            filename = "IMG_{}.jpg".format(t)
-            cv2.imwrite(filename, frame_color)
-            time.sleep(1)
+                prev_faces = []
+                prev_shot = datetime.datetime.now()
 
         ret, jpeg = cv2.imencode('.jpg', image)
         byte_frame = jpeg.tobytes()
@@ -100,5 +116,6 @@ def generate_frame():
 '''
 class CameraPhotoView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'camera_photo.html'
+
 
 
