@@ -11,25 +11,25 @@ https://docs.djangomyproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+import environ
 
-# Build paths inside the myproject like this: BASE_DIR / 'subdir'.
+env = environ.Env(
+    DEBUG=(bool, True)
+)
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
+SECRET_KEY = env('SECRET_KEY')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangomyproject.com/en/3.2/howto/deployment/checklist/
+DATABASES = {
+    'default': env.db(),
+    'extra': env.db('DATABASE_URL')
+}
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mnrmr6k2#p=b42e1)7)y=6m4^mn9!n5o8te-uqu*1@l)r2c&d)'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -81,16 +81,6 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangomyproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'camera',
-        'USER': 'naka',
-        'PASSWORD': 'nakasyo2792',
-        'HOST': '127.0.0.1',
-        'POST': '5432',
-    }
-}
 
 
 # Password validation
@@ -131,14 +121,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 # Default primary key field type
 # https://docs.djangomyproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -162,12 +153,6 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'nakasyo2792@gmail.com'
-EMAIL_HOST_PASSWORD = '2792'
-EMAIL_USE_TLS = True
 
 AUTH_USER_MODEL ='accounts.CustomUser'
 LOGIN_REDIRECT_URL = 'monitercamera:camera'

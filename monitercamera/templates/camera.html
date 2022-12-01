@@ -22,10 +22,10 @@
     <div class="container">
         <div class="row gx-4 justify-content-center">
             <div class="col-lg-8">
-                <h2>About this function</h2>
-                <p class="lead">
-                    <a class="nav-link" href="{% url 'monitercamera:camera_video' %}">こちら</a>
-                </p>
+                <h1 class="py-4">About this function</h1>
+                    <h4 class="py-2">全方位で監視しています。</h4>
+                    <h4>↓人の顔を検出すると、青色の枠で認識されます。↓<span style="width: 100px;"><a class="nav-link" href="{% url 'monitercamera:camera_video' %}">こちら</a></span></h4>
+                    <h4>↓認識された画像は、CAMERA PHOTO で閲覧できます↓<span style="width: 100px;"><a class="nav-link" href="{% url 'monitercamera:camera_photo' %}">こちら</a></span></h4>
             </div>
         </div>
     </div>

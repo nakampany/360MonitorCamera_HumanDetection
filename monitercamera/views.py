@@ -61,7 +61,7 @@ def videoView():
 '''
 
 def generate_frame():
-    capture = cv2.VideoCapture(0)
+    capture = cv2.VideoCapture(1)
 
     anterior = 0
     shot_dense = 0.5
@@ -78,7 +78,7 @@ def generate_frame():
         # 動画ストリームからフレームを取得
         success, image = capture.read()
         cascade_path = str(BASE_DIR) + '/facedetect_features/haarcascade_frontalface_default.xml'
-        gry = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+        gry = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         cascade = cv2.CascadeClassifier(cascade_path)
         facerect = cascade.detectMultiScale(gry, 1.5, 2)
         rectange_color = (255,0,0)
