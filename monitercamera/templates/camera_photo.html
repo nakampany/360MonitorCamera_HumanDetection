@@ -27,8 +27,10 @@
     <div class="container">
         <div class="row gx-4 justify-content-center">
                 <h2>Detection Images</h2>
+                <hr class="my-4">
                 <div class="post-preview">
-                    <div class="row g-0">
+                    <h4 class="py-4">↓人の顔を検出すると、青色の枠で認識されます。↓<span style="width: 100px;"><a class="nav-link" href="{% url 'monitercamera:camera_video' %}">こちら</a></span></h4>
+                    <div class="row g-2">
                         <div class="col-lg-3 col-sm-6">
                             <a class="portfolio-box" href="{% static 'assets/img/IMG0.jpg' %}" title="0">
                                 <img src="{% static 'assets/img/IMG0.jpg' %}" style="width: 100%;" alt="">
@@ -91,7 +93,6 @@
                         </div>
                     </div>
                 </div>
-                <hr class="my-4">
         </div>
     </div>
 </section>
