@@ -1,0 +1,26 @@
+version: '3'
+services:
+  # データベース
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Djangoアプリ
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - ${WEB_PORT}:80
+    depends_on:
+      - db
+ 
+volumes:
+  postgres_data:
+
