@@ -11,7 +11,8 @@ from django.http import StreamingHttpResponse
 from django.shortcuts import render
 from myproject.settings import BASE_DIR
 import datetime
-import time
+from theta_shutter import theta_api
+import os
 
 
 '''
@@ -56,6 +57,14 @@ class CameraVideoView(LoginRequiredMixin, generic.TemplateView):
 def videoView():
     return lambda _: StreamingHttpResponse(generate_frame(), content_type='multipart/x-mixed-replace; boundary=frame')
 
+
+
+# Make dir path
+temp_save_dir = './saved_img'
+dp_save_dir = '/selfie-theta'
+
+if not os.path.exists(temp_save_dir):
+    os.makedirs(temp_save_dir)
 '''
 フレーム生成・返却する処理
 '''
@@ -69,6 +78,8 @@ def generate_frame():
     prev_faces = []
     prev_shot = None
     count=0
+
+
 
     #フレーム数カウント用
     while True:
@@ -101,6 +112,7 @@ def generate_frame():
                 save_fig_name = './static/assets/img/IMG{}.jpg'.format(count)
                 count += 1
                 cv2.imwrite(save_fig_name, image)
+                theta_api(temp_save_dir)
 
                 prev_faces = []
                 prev_shot = datetime.datetime.now()
