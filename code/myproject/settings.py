@@ -13,12 +13,10 @@ import os
 from pathlib import Path
 import environ
 
-env = environ.Env(
-    DEBUG=(bool, True)
-)
+env = environ.Env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+environ.Env.read_env(Path.joinpath(BASE_DIR, '.env'))
 
 SECRET_KEY = env('SECRET_KEY')
 
@@ -120,9 +118,8 @@ USE_TZ = True
 # https://docs.djangomyproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    Path.joinpath(BASE_DIR, 'static'),
 )
 
 # Default primary key field type

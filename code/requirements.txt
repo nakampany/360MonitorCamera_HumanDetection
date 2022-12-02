@@ -1,0 +1,15 @@
+Django
+django-widget-tweaks~=1.4.8
+dj-database-url==0.5.0
+dj-static==0.0.6
+python-decouple==3.3
+django-environ
+gunicorn
+psycopg2-binary
+whitenoise
+django-allauth
+django-bootstrap5
+pillow
+opencv-python
+opencv-contrib-python
+pathlib
