@@ -13,7 +13,8 @@ https://docs.google.com/presentation/d/1mHTIemTVVnpD-LWCDNwLsCj1zDocEr_xIYFq6Pqf
 
 </br>
 theta vを使用し、360度監視します
-![IMG_9266](https://user-images.githubusercontent.com/103278404/206819908-5aa631a7-0711-44fb-b4cf-042f58543baa.jpg)
+![IMG_9266](https://user-images.githubusercontent.com/103278404/206820903-111c2ef8-3cd1-49a5-bb25-c31a25365f0d.jpg)
+
 
 
 # 機能一覧
