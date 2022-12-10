@@ -12,9 +12,8 @@ https://docs.google.com/presentation/d/1mHTIemTVVnpD-LWCDNwLsCj1zDocEr_xIYFq6Pqf
 # 機能概要
 
 </br>
-theta vを使用し、360度監視します
-</br>
-![IMG_9266](https://user-images.githubusercontent.com/103278404/206820903-111c2ef8-3cd1-49a5-bb25-c31a25365f0d.jpg)
+thetaV,openCV
+を使用し、360度監視します
 
 
 
