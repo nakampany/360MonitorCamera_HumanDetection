@@ -40,3 +40,4 @@ openCVで顔を検知をする</br>
 
 </br>
 Python3でRICOH THETA API v2.1を叩く - Qiita
+https://qiita.com/ysdyt/items/55771b1706308394fe78
